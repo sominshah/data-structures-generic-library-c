@@ -1,4 +1,4 @@
-#include "singlyList.h"
+#include "doublyList.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -7,11 +7,11 @@ void freeInt(void *data) {
 }
 
 int main() {
-    SinglyList *list = SinglyList_createList(); // Your wrapper
+    DoublyList *list = DoublyList_createList(); // Your wrapper
     for (int i = 0; i < 5; i++) {
         int *val = malloc(sizeof(int));
         *val = i;
-        list->listAdd(list, val);
+        list->insertAt(list,i, val);
     }
 
     for (size_t i = 0; i < list->listSize(list); i++) {
@@ -22,10 +22,10 @@ int main() {
     //List Iterating via Iterator-
     printf("Printing via iterator\n");
 
-    SinglyListIterator *iterator = list->getIterator(list);   
+    DoublyListIterator *iterator = list->getIterator(list);   
 
     //or you can add iterator like below directly -
-    //SinglyListIterator * iterator= SinglyListIterator_new(list->head); 
+    //DoublyListIterator * iterator= DoublyListIterator_new(list->head); 
 
 
         while (iterator->hasNext(iterator)) 
@@ -34,6 +34,24 @@ int main() {
             printf("%d\n", *value);
         }
         iterator->destroy(iterator);
+
+
+    printf("Printing via reverse iterator\n");
+
+    DoublyListIterator *itr = list->getReverseIterator(list);   
+
+    //or you can add iterator like below directly -
+    //DoublyListIterator * iterator= DoublyListIterator_new(list->head); 
+
+        while (itr->hasPrevious(itr)) 
+        {
+            int * value = (int *) itr->previous(itr);
+            printf("%d\n", *value);
+        }
+        itr->destroy(itr);
+
+
+
     list->destroyList(list);
     return 0;
 }

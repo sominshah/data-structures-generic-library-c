@@ -6,10 +6,6 @@
 extern "C" {          //"These functions have C-style names, do not mangle them."
 #endif
 
-#define AUTHOR_SIGNATURE "Author: Somin Ali | 2025"
-#define AUTHOR_EMAIL "Email: ssssomin4@gmail.com"
-#define AUTHOR_GITHUB "GitHub Link: https://sominshah.github.io/index.html"
-
 /*
  * Author       : Somin Ali
  * Email        : ssssomin4@gmail.com
@@ -24,6 +20,18 @@ typedef struct StackNode {
     struct StackNode *next;
 } StackNode;
 
+
+typedef struct StackIterator
+{
+    StackNode *current;
+    int (*hasNext)(struct StackIterator *);
+    void *(*next)(struct StackIterator *);
+    void (*destroy)(struct StackIterator *);
+} StackIterator;
+ 
+StackIterator *StackIterator_new(StackNode *start);
+
+
 typedef struct Stack 
 {
 StackNode *head;
@@ -37,6 +45,7 @@ void * (*peek)(struct Stack *stack);
 size_t (*getSize)(struct Stack *stack);
 int (*isEmpty)(struct Stack *stack);
 void (*destroy)(struct Stack *stack);
+StackIterator *(*getIterator)(struct Stack *);
 } Stack;
 
 void Stack_freeInt(void *data);

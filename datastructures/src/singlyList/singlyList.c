@@ -11,21 +11,11 @@
 #include "singlyList.h"
 
 typedef void (*FreeFunction)(void *);
-void SinglyList_freeInt(void *data);
-void SinglyList_freeChar(void *data);
-void SinglyList_freeFloat(void *data);
-void SinglyList_freeDouble(void *data);
-void SinglyList_freeString(void *data);
+void SinglyList_freeData(void *data);
 
-SinglyList * SinglyList_createIntList();                     
-SinglyList * SinglyList_createCharList();
-SinglyList * SinglyList_createFloatList();                     
-SinglyList * SinglyList_createDoubleList();                    
-SinglyList * SinglyList_createStringList();                    
+SinglyList * SinglyList_createList();                    
 SinglyList* SinglyList_new(FreeFunction freeFn);
 
-
-SinglyList * SinglyList_cloneList(struct SinglyList *list,FreeFunction freeFn);
 void SinglyList_listAdd(SinglyList *list, void *data);
 void * SinglyList_listGet(SinglyList *list, size_t index);
 void SinglyList_listRemoveAt(SinglyList *list, size_t index);
@@ -41,27 +31,9 @@ static void SinglyListIterator_destroy(SinglyListIterator *iterator);
 SinglyListIterator *SinglyListIterator_new(SinglyListNode *start); 
 
 
+void SinglyList_freeData(void *data)   { free(data); }
 
-
-// ======= Internal Memory-Freeing Functions =======
-
-void SinglyList_freeInt(void *data)   { free(data); }
-void SinglyList_freeChar(void *data)  { free(data); }
-void SinglyList_freeFloat(void *data) { free(data); }
-void SinglyList_freeDouble(void *data){ free(data); }
-void SinglyList_freeString(void *data){ free(data); }
-
-
-
-SinglyList* SinglyList_createIntList()    { return SinglyList_new(SinglyList_freeInt); }
-
-SinglyList* SinglyList_createCharList()   { return SinglyList_new(SinglyList_freeChar); }
-
-SinglyList* SinglyList_createFloatList()  { return SinglyList_new(SinglyList_freeFloat); }
-
-SinglyList* SinglyList_createDoubleList() { return SinglyList_new(SinglyList_freeDouble); }
-
-SinglyList* SinglyList_createStringList() { return SinglyList_new(SinglyList_freeString); }
+SinglyList* SinglyList_createList()    { return SinglyList_new(SinglyList_freeData); }
 
 SinglyList* SinglyList_new(FreeFunction freeFn)
 {
@@ -74,33 +46,16 @@ if(list==NULL)return NULL;
     list->freeFn = freeFn;
 
     // Bind methods
-    list->cloneList = SinglyList_cloneList;
     list->listAdd = SinglyList_listAdd;
     list->listGet = SinglyList_listGet;
     list->listRemoveAt = SinglyList_listRemoveAt;
     list->listSize = SinglyList_listSize;
     list->destroyList = SinglyList_destroyList; 
     list->getIterator = SinglyList_getIterator; 
-
     return list;
 }
 
-SinglyList * SinglyList_cloneList(SinglyList *list, FreeFunction freeFn) 
-{
-    if (!list) return NULL;
 
-    SinglyList *clone = SinglyList_new(freeFn);
-    if (!clone) return NULL;
-
-    SinglyListNode *curr = list->head;
-    while (curr) {
-        void *dataCopy = malloc(sizeof(*(curr->data))); // Shallow copy
-        if (dataCopy) memcpy(dataCopy, curr->data, sizeof(*(curr->data)));
-        clone->listAdd(clone, dataCopy);
-        curr = curr->next;
-    }
-    return clone;
-}
 void SinglyList_listAdd(SinglyList *list, void *data)
 {
 	if(!list)return;

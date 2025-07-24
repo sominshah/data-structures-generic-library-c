@@ -17,12 +17,26 @@ int main() {
 
     printf("Stack Size:%d \n",stack->getSize(stack));
 
+
+    printf("Printing stack elements by iterator\n");
+
+    StackIterator * itr = stack->getIterator(stack);
+    int i=0;
+    while(itr->hasNext(itr))
+    {
+        int * val = itr->next(itr);
+        printf("\nElement At the poisition %d: %d\n",i,*val);
+        i++;
+    }
+
     while(!stack->isEmpty(stack))
     {
         int *val = stack->pop(stack);
-        printf("Element : %d\n", *val);
+        printf("Removig Element : %d\n", *val);
         free(val);
     }
+
+    printf("Stack Size After POP Operation:%d \n",stack->getSize(stack));
 
     stack->destroy(stack);
     return 0;

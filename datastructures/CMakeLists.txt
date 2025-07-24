@@ -12,8 +12,8 @@ include_directories(${PROJECT_SOURCE_DIR}/include)
 # Add subdirectories for each module
 add_subdirectory(src/singlyList)
 add_subdirectory(src/stack)
-
-#add_subdirectory(src/doublyList)
+add_subdirectory(src/queue)
+add_subdirectory(src/doublyList)
 
 #add_subdirectory(src/utility)
 

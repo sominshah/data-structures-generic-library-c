@@ -47,7 +47,6 @@ SinglyListNode *head;
 SinglyListNode *tail;
 size_t size;
 FreeFunction freeFn;        
-struct SinglyList * (*cloneList)(struct SinglyList *list,FreeFunction freeFn);
 void (*listAdd)(struct SinglyList *list, void *data);
 void * (*listGet)(struct SinglyList *list, size_t index);
 void (*listRemoveAt)(struct SinglyList *list, size_t index);
@@ -57,29 +56,12 @@ SinglyListIterator *(*getIterator)(struct SinglyList *);
 } SinglyList;
 
 
-
-
-
 SinglyListIterator *SinglyListIterator_new(SinglyListNode *start); 
 
-
-
-
-void SinglyList_freeInt(void *data);
-void SinglyList_freeChar(void *data);
-void SinglyList_freeFloat(void *data);
-void SinglyList_freeDouble(void *data);
-void SinglyList_freeString(void *data);
-
-SinglyList * SinglyList_createIntList();                     
-SinglyList * SinglyList_createCharList();
-SinglyList * SinglyList_createFloatList();                     
-SinglyList * SinglyList_createDoubleList();                    
-SinglyList * SinglyList_createStringList();                    
+void SinglyList_freeData(void *data);
+SinglyList * SinglyList_createList();
 SinglyList* SinglyList_new(FreeFunction freeFn);
 
-
-SinglyList * SinglyList_cloneList(struct SinglyList *list,FreeFunction freeFn);
 void SinglyList_listAdd(SinglyList *list, void *data);
 void * SinglyList_listGet(SinglyList *list, size_t index);
 void SinglyList_listRemoveAt(SinglyList *list, size_t index);
