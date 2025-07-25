@@ -1,4 +1,5 @@
-#Doubly Linked List
+# Doubly Linked List
+
 A **generic**, **memory-safe** Doubly Linked List implementation in C. Supports any data type via `void*`, with custom cleanup functions.
 ---
 
