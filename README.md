@@ -6,14 +6,24 @@ A lightweight, **generic**, and **memory-safe** data structure library written i
 
 ## 📚 Data Structures
 
-| Data Structure     | Description                                                                                                                                                                   |
-| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `SinglyList`       | Generic singly linked list with `listAdd`, `listGet`, `listRemoveAt`, `listSize`, `destroyList`, `getIterator`                                                                |
-| `DoublyList`       | Doubly linked list with `addFirst`, `addLast`, `removeFirst`, `removeLast`, `removeAt`, `insertAt`, `listGet`, `listSize`, `destroyList`, `getIterator`, `getReverseIterator` |
-| `Stack`            | LIFO stack with `push`, `pop`, `peek`, `destroy`, `isEmpty`, `getIterator`                                                                                                    |
-| `Queue`            | FIFO queue with `enqueue`, `dequeue`, `peek`, `getSize`, `destroy`, `isEmpty`, `getIterator`                                                                                  |
-| `Heap`             | Binary heap with `add`, `remove`, `peek`, `getSize`, `destroy`, `isEmpty`                                                                                                     |
-| `BinarySearchTree` | BST with `add`, `remove`, `find`, `isEmpty`, `getSize`, `clear`, `destroy`, in-order/pre/post/level-order                                                                     |
+| Data Structure     | Description                                                                                                                                                                   | Details |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| `SinglyList`       | Generic singly linked list with `listAdd`, `listGet`, `listRemoveAt`, `listSize`, `destroyList`, `getIterator`                                                                | [View ➤](src/singlyList/README.md) |
+| `DoublyList`       | Doubly linked list with `addFirst`, `addLast`, `removeFirst`, `removeLast`, `removeAt`, `insertAt`, `listGet`, `listSize`, `destroyList`, `getIterator`, `getReverseIterator` | [View ➤](src/doublyList/README.md) |
+| `Stack`            | LIFO stack with `push`, `pop`, `peek`, `destroy`, `isEmpty`, `getIterator`                                                                                                    | [View ➤](src/stack/README.md) |
+| `Queue`            | FIFO queue with `enqueue`, `dequeue`, `peek`, `getSize`, `destroy`, `isEmpty`, `getIterator`                                                                                  | [View ➤](src/queue/README.md) |
+| `Heap`             | Binary heap with `add`, `remove`, `peek`, `getSize`, `destroy`, `isEmpty`                                                                                                     | [View ➤](src/heap/README.md) |
+| `BinarySearchTree` | BST with `add`, `remove`, `find`, `isEmpty`, `getSize`, `clear`, `destroy`, in-order/pre/post/level-order                                                                     | [View ➤](src/bst/README.md) |
+
+---
+
+## ✅ Features
+
+- Works with any data type using `void*`
+- Optional cleanup function for deep free
+- Built-in iterator support
+- C89/C99 compatible
+- Modular design: each structure is isolated and testable
 
 ---
 
