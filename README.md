@@ -1,82 +1,66 @@
 # Generic Data Structure Library in C
 
-This library provides a set of generic, easy-to-use, and memory-safe data structures written in pure C. It supports any data type using `void*` and allows optional memory management via user-defined cleanup functions.
-
----
-
-## 📦 Features
-
-* ✅ Generic Singly Linked List
-* ✅ Optional cleanup functions (like `free()`) for memory safety
-* ✅ Predefined list creators (int, float, double, char\*, etc.)
-* ✅ Type-safe wrappers and user-friendly APIs
-* ✅ Iterator support for easy traversal
-* ✅ Stack, queue, and other structures coming soon
+A lightweight, **generic**, and **memory-safe** data structure library written in pure C. Supports any data type via `void*` and optional cleanup functions.
 
 ---
 
 ## 📚 Data Structures
 
-| Data Structure | Description                                                      |
-| -------------- | ---------------------------------------------------------------- |
-| `SinglyList`   | Generic singly linked list with append, get, remove, clone, etc. |
-| `Stack`        | Generic stack with push, pop, peek, clone, destroy, isEmpty etc. |
+| Data Structure     | Description                                                                                                                                                                   |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `SinglyList`       | Generic singly linked list with `listAdd`, `listGet`, `listRemoveAt`, `listSize`, `destroyList`, `getIterator`                                                                |
+| `DoublyList`       | Doubly linked list with `addFirst`, `addLast`, `removeFirst`, `removeLast`, `removeAt`, `insertAt`, `listGet`, `listSize`, `destroyList`, `getIterator`, `getReverseIterator` |
+| `Stack`            | LIFO stack with `push`, `pop`, `peek`, `destroy`, `isEmpty`, `getIterator`                                                                                                    |
+| `Queue`            | FIFO queue with `enqueue`, `dequeue`, `peek`, `getSize`, `destroy`, `isEmpty`, `getIterator`                                                                                  |
+| `Heap`             | Binary heap with `add`, `remove`, `peek`, `getSize`, `destroy`, `isEmpty`                                                                                                     |
+| `BinarySearchTree` | BST with `add`, `remove`, `find`, `isEmpty`, `getSize`, `clear`, `destroy`, in-order/pre/post/level-order                                                                     |
+
+---
+
+## 🛠️ Folder Structure
+
+```
+datastructures/
+├── include/                    # Public headers
+│   └── datastructures.h        # Umbrella header
+├── src/
+│   ├── binarySearchTree/       # BST module
+│   ├── doublyList/             # DoublyList module
+│   ├── heap/                   # Heap module
+│   ├── queue/                  # Queue module
+│   ├── singlyList/             # SinglyList module
+│   └── stack/                  # Stack module
+├── lib/                        # Compiled libraries (.a / .so)
+├── bin/                        # Test executables
+```
 
 ---
 
 ## 🚀 Getting Started
 
-### 🛠 Folder Structure
-
-```
-datastructures/
-├── include/              # Main header files
-│   └── datastructures.h  # Aggregated include file
-├── src/
-│   ├── singlyList/       # Singly linked list implementation
-│   └── stack/            # Stack implementation
-├── lib/                  # Compiled static/shared libraries
-├── bin/                  # Test executables
-```
-
----
-
-## 🚀 How to Use
-
-You can **reuse this library in your own C projects** by linking against the prebuilt `.a` or `.so` files in the `lib/` directory.
-
-### 🛠️ 1. Include headers
+### 1. Include Headers
 
 ```c
-#include "datastructures.h" // or include individual headers like singlyList.h
+#include "datastructures.h"  // Or specific headers like "singlyList.h"
 ```
 
-Make sure your compiler can find the `include/` directory.
+Ensure your compiler can locate `include/`.
 
----
+### 2. Link the Library
 
-### 📚 2. Link the static or shared library
+**Static Linking:**
 
-If you have:
-
-* Static lib: `datastructures/lib/libraries.a`
-* Shared lib: `datastructures/lib/libraries.so`
-
-#### ✅ Compile using gcc:
-
-```sh
-gcc -I ./datastructures/include -L ./datastructures/lib main.c -llibraries -o app
-```
-
-Or with static linking:
-
-```sh
+```bash
 gcc -I ./datastructures/include ./main.c ./datastructures/lib/libraries.a -o app
 ```
 
----
+**Shared Linking:**
 
-### 📖 Example: Using a Generic Int List
+```bash
+gcc -I ./datastructures/include -L ./datastructures/lib main.c -llibraries -o app
+```
+
+### 3. Example: Using a Generic Int List
 
 ```c
 #include "singlyList.h"
@@ -88,7 +72,7 @@ void freeInt(void *data) {
 }
 
 int main() {
-    SinglyList *list = SinglyList_createIntList(); // Wrapper
+    SinglyList *list = SinglyList_createIntList();
     for (int i = 0; i < 5; i++) {
         int *val = malloc(sizeof(int));
         *val = i;
@@ -107,20 +91,18 @@ int main() {
 
 ---
 
-## 🚫 License
+## 📜 License
 
-This library is open-source and free to use under the MIT License.
+This library is released under the **MIT License**.
 
 ---
 
 ## 🙌 Contributions Welcome
 
-Feel free to fork, extend, and improve the library. Upcoming modules include:
+Feel free to fork, improve, and extend the library.
+Upcoming modules:
 
-* SinglyList Iterators
-* Queue
-* Min Heap
-* Max Heap
-* Tree
+* AVL Tree
+* Common Algorithms
 
-PRs and suggestions are always welcome!
+Pull requests and suggestions are always welcome!
