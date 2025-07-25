@@ -1,66 +1,120 @@
- * Author       : Somin Ali
- * Email        : ssssomin4@gmail.com
- * GitHub       : https://sominshah.github.io/index.html
- * Created on   : 2025-07-23
- * Description  : Singly Linked List
- 
-===========================
-Generic Singly Linked List
-===========================
-This library provides a generic, flexible, and memory-safe singly linked list in C.
-USAGE MODES
-===========
+# Singly Linked List
 
-1. Beginner Mode (No cleanup knowledge required)
-------------------------------------------------
-(a) For integers (auto cleanup)
-    
-    SinglyList *list = createIntList();
+A **generic**, **memory-safe** singly linked list implementation in C. Supports any data type via `void*`, with custom cleanup and iterator support.
 
+---
+
+## 🔧 Features
+
+* **Generic Storage**: Elements stored as `void*`
+* **Custom Cleanup**: User-defined cleanup function (`FreeFunction`) to deallocate node data
+* **Core Operations**:
+
+  * `listAdd`      — Append data to the end of the list
+  * `listGet`      — Retrieve data at a specific index
+  * `listRemoveAt` — Remove node at a specific index
+  * `listSize`     — Number of elements in the list
+  * `destroyList`  — Free all nodes and list structure
+* **Iterator Support**:
+
+  * `getIterator` — Forward traversal starting at head
+  * `SinglyListIterator` methods: `hasNext`, `next`, `destroy`
+
+---
+
+## 📁 API Overview
+
+```c
+// Create list with default cleanup
+typedef void (*FreeFunction)(void *);
+SinglyList *list = SinglyList_createList();  // uses free() by default
+
+// Member methods
+list->listAdd(list, data);
+void *elem = list->listGet(list, index);
+list->listRemoveAt(list, index);
+size_t n = list->listSize(list);
+
+// Iterator
+SinglyListIterator *it = list->getIterator(list);
+while (it->hasNext(it)) {
+    void *d = it->next(it);
+    // process d
+}
+it->destroy(it);
+
+// Cleanup
+list->destroyList(list);
+```
+
+* To customize cleanup, use:
+
+  ```c
+  SinglyList *list = SinglyList_new(freeFn);
+  ```
+
+  where `freeFn` is your own `void (*)(void*)` function.
+
+---
+
+## 📖 Usage Example
+
+```c
+#include "singlyList.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+// Custom cleanup for integers
+void freeInt(void *data) {
+    free(data);
+}
+
+int main() {
+    // Create a list for integers
+    SinglyList *list = SinglyList_new(freeInt);
+
+    // Append values 0–4
     for (int i = 0; i < 5; i++) {
         int *val = malloc(sizeof(int));
         *val = i;
-        listAdd(list, val);
+        list->listAdd(list, val);
     }
 
-    destroyList(list);  // Safe cleanup
-
-(b) For custom types (you handle memory)
-    
-    SinglyList *list = createSimpleList();
-
-    char *str = strdup("Hello");
-    listAdd(list, str);
-
-    free(str);  // You are responsible for cleanup
-    destroyList(list);  // Only frees nodes, not data
-
-
-2. Advanced Mode (Provide custom cleanup)
------------------------------------------
-    
-    void freeString(void *data) {
-        free(data);
+    // Access by index
+    for (size_t i = 0; i < list->listSize(list); i++) {
+        int *v = list->listGet(list, i);
+        printf("Element %zu: %d\n", i, *v);
     }
 
-    SinglyList *list = createList(freeString);
-    
-    char *msg = strdup("World");
-    listAdd(list, msg);
-    destroyList(list);  // Also calls freeString(msg)
+    // Iterate
+    printf("\nIterating:\n");
+    SinglyListIterator *it = list->getIterator(list);
+    while (it->hasNext(it)) {
+        int *v = it->next(it);
+        printf("%d ", *v);
+    }
+    it->destroy(it);
 
-FUNCTIONS
-=========
+    // Remove element at index 2
+    int *removed = list->listGet(list, 2);
+    list->listRemoveAt(list, 2);
+    printf("\nRemoved at 2: %d\n", *removed);
+    free(removed);
 
-- listAdd(list, data)      → Adds element to end
-- listGet(list, index)     → Returns data at index
-- listSize(list)           → Returns number of items
-- destroyList(list)        → Cleans up all memory
+    // Cleanup all
+    list->destroyList(list);
+    return 0;
+}
+```
 
-SAFEGUARDS
-==========
+---
 
-- If no `freeFn` is given, destroyList only frees internal nodes.
-- If `freeFn` is provided, it will be applied to all `data` nodes on destruction.
-- NULL checks are internally managed.
+## 📜 License
 
+Released under the **MIT License**. Feel free to use, modify, and distribute.
+
+---
+
+## 🙌 Contributing
+
+Pull requests, issues, and feature suggestions are welcome.
