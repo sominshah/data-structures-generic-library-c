@@ -116,4 +116,4 @@ int main() {
 
 ## 📜 License
 
-Released under the **MIT License**. F
+Released under the **MIT License**.
