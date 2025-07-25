@@ -12,7 +12,6 @@
 
 typedef void (*FreeFunctionQueue)(void *);
 
-Queue * Queue_clone(struct Queue *queue,FreeFunctionQueue freeFn);
 void Queue_enqueue(Queue *queue, void *data);
 void * Queue_dequeue(Queue *queue);
 void * Queue_peek(Queue *queue);
@@ -28,37 +27,12 @@ static void QueueIterator_destroy(QueueIterator *iterator);
 QueueIterator *QueueIterator_new(QueueNode *start);
 
 
-
-void Queue_freeInt(void *data);
-void Queue_freeChar(void *data);
-void Queue_freeFloat(void *data);
-void Queue_freeDouble(void *data);
-void Queue_freeString(void *data);
-
-
-void Queue_freeInt(void *data)   { free(data); }
-void Queue_freeChar(void *data)  { free(data); }
-void Queue_freeFloat(void *data) { free(data); }
-void Queue_freeDouble(void *data){ free(data); }
-void Queue_freeString(void *data){ free(data); }
-
-
-Queue * Queue_createIntQueue();                     
-Queue * Queue_createCharQueue();
-Queue * Queue_createFloatQueue();                     
-Queue * Queue_createDoubleQueue();                    
-Queue * Queue_createStringQueue();                    
+void Queue_freeData(void *data);
+void Queue_freeData(void *data)   { free(data); }
+Queue * Queue_createQueue();                     
 Queue* Queue_new(FreeFunctionQueue freeFn);
 
-Queue* Queue_createIntQueue()    { return Queue_new(Queue_freeInt); }
-
-Queue* Queue_createCharQueue()   { return Queue_new(Queue_freeChar); }
-
-Queue* Queue_createFloatQueue()  { return Queue_new(Queue_freeFloat); }
-
-Queue* Queue_createDoubleQueue() { return Queue_new(Queue_freeDouble); }
-
-Queue* Queue_createStringQueue() { return Queue_new(Queue_freeString); }
+Queue* Queue_createQueue()    { return Queue_new(Queue_freeData); }
 
 Queue* Queue_new(FreeFunctionQueue freeFn)
 {
@@ -70,7 +44,6 @@ if(queue==NULL)return NULL;
     queue->freeFn = freeFn;
 
     // Bind methods
-    queue->clone = Queue_clone;
     queue->enqueue = Queue_enqueue;
     queue->dequeue = Queue_dequeue;
     queue->peek = Queue_peek;
@@ -86,42 +59,6 @@ size_t Queue_getSize(Queue *queue)
 {
 	  return queue ? queue->size : 0;
 }
-
-
-Queue* Queue_clone(Queue *queue, FreeFunctionQueue freeFn) 
-{
-    if (!queue) return NULL;
-
-    Queue *newQueue = Queue_new(freeFn);
-    if (!newQueue) return NULL;
-
-    QueueNode *current = queue->head;
-    QueueNode **insertPtr = &(newQueue->head);
-
-    while (current) 
-    {
-        QueueNode *newNode = (QueueNode *)malloc(sizeof(QueueNode));
-        if (!newNode) 
-        {
-            newQueue->destroy(newQueue);
-            return NULL;
-        }
-        newNode->data = current->data; // shallow copy
-        newNode->next = NULL;
-
-        *insertPtr = newNode;
-        insertPtr = &(newNode->next);
-        current = current->next;
-        newQueue->size++;
-    }
-
-    newQueue->tail = newQueue->head;
-    while (newQueue->tail && newQueue->tail->next)
-        newQueue->tail = newQueue->tail->next;
-
-    return newQueue;
-}
-
 
 void Queue_enqueue(Queue *queue, void *data) 
 {

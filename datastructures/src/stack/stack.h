@@ -38,7 +38,6 @@ StackNode *head;
 StackNode *tail;
 size_t size;
 FreeFunctionStack freeFn;        
-struct Stack * (*clone)(struct Stack *stack,FreeFunctionStack freeFn);
 void (*push)(struct Stack *stack,void * data);
 void * (*pop)(struct Stack *stack);
 void * (*peek)(struct Stack *stack);
@@ -48,21 +47,11 @@ void (*destroy)(struct Stack *stack);
 StackIterator *(*getIterator)(struct Stack *);
 } Stack;
 
-void Stack_freeInt(void *data);
-void Stack_freeChar(void *data);
-void Stack_freeFloat(void *data);
-void Stack_freeDouble(void *data);
-void Stack_freeString(void *data);
-
-Stack * Stack_createIntStack();                     
-Stack * Stack_createCharStack();
-Stack * Stack_createFloatStack();                     
-Stack * Stack_createDoubleStack();                    
-Stack * Stack_createStringStack();                    
+void Stack_freeData(void *data);
+Stack * Stack_createStack();                     
 Stack* Stack_new(FreeFunctionStack freeFn);
 
 
-Stack * Stack_clone(struct Stack *stack,FreeFunctionStack freeFn);
 void Stack_push(Stack *stack, void *data);
 void * Stack_pop(Stack *stack);
 void * Stack_peek(Stack *stack);

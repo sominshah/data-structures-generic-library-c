@@ -38,7 +38,6 @@ QueueNode *head;
 QueueNode *tail;
 size_t size;
 FreeFunctionQueue freeFn;        
-struct Queue * (*clone)(struct Queue *queue,FreeFunctionQueue freeFn);
 void (*enqueue)(struct Queue *queue,void * data);
 void * (*dequeue)(struct Queue *queue);
 void * (*peek)(struct Queue *queue);
@@ -49,21 +48,10 @@ QueueIterator *(*getIterator)(struct Queue *);
 
 } Queue;
 
-void Queue_freeInt(void *data);
-void Queue_freeChar(void *data);
-void Queue_freeFloat(void *data);
-void Queue_freeDouble(void *data);
-void Queue_freeString(void *data);
-
-Queue * Queue_createIntQueue();                     
-Queue * Queue_createCharQueue();
-Queue * Queue_createFloatQueue();                     
-Queue * Queue_createDoubleQueue();                    
-Queue * Queue_createStringQueue();                    
+void Queue_freeData(void *data);
+Queue * Queue_createQueue();                     
 Queue* Queue_new(FreeFunctionQueue freeFn);
 
-
-Queue * Queue_clone(struct Queue *queue,FreeFunctionQueue freeFn);
 void Queue_enqueue(Queue *queue, void *data);
 void * Queue_dequeue(Queue *queue);
 void * Queue_peek(Queue *queue);

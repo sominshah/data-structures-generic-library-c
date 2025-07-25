@@ -7,7 +7,7 @@ void freeInt(void *data) {
 }
 
 int main() {
-    Stack *stack = Stack_createIntStack(); // Your wrapper
+    Stack *stack = Stack_createStack(); // Your wrapper
     for (int i = 0; i < 5; i++) 
     {
         int *val = malloc(sizeof(int));

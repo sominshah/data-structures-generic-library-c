@@ -14,6 +14,8 @@ add_subdirectory(src/singlyList)
 add_subdirectory(src/stack)
 add_subdirectory(src/queue)
 add_subdirectory(src/doublyList)
+add_subdirectory(src/heap)
+add_subdirectory(src/binarySearchTree)
 
 #add_subdirectory(src/utility)
 

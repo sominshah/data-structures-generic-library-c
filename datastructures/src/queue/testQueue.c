@@ -7,7 +7,7 @@ void freeInt(void *data) {
 }
 
 int main() {
-    Queue *queue = Queue_createIntQueue(); // Your wrapper
+    Queue *queue = Queue_createQueue(); // Your wrapper
     for (int i = 0; i < 5; i++) 
     {
         int *val = malloc(sizeof(int));

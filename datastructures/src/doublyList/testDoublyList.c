@@ -6,7 +6,8 @@ void freeInt(void *data) {
     free(data);
 }
 
-int main() {
+int main() 
+{
     DoublyList *list = DoublyList_createList(); // Your wrapper
     for (int i = 0; i < 5; i++) {
         int *val = malloc(sizeof(int));
@@ -42,15 +43,12 @@ int main() {
 
     //or you can add iterator like below directly -
     //DoublyListIterator * iterator= DoublyListIterator_new(list->head); 
-
         while (itr->hasPrevious(itr)) 
         {
             int * value = (int *) itr->previous(itr);
             printf("%d\n", *value);
         }
-        itr->destroy(itr);
-
-
+        itr->destroy(itr); 
 
     list->destroyList(list);
     return 0;
