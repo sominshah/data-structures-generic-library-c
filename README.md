@@ -8,12 +8,12 @@ A lightweight, **generic**, and **memory-safe** data structure library written i
 
 | Data Structure     | Description                                                                                                                                                                   | Details |
 | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| `SinglyList`       | Generic singly linked list with `listAdd`, `listGet`, `listRemoveAt`, `listSize`, `destroyList`, `getIterator`                                                                | [View ➤](src/singlyList/README.md) |
-| `DoublyList`       | Doubly linked list with `addFirst`, `addLast`, `removeFirst`, `removeLast`, `removeAt`, `insertAt`, `listGet`, `listSize`, `destroyList`, `getIterator`, `getReverseIterator` | [View ➤](src/doublyList/README.md) |
-| `Stack`            | LIFO stack with `push`, `pop`, `peek`, `destroy`, `isEmpty`, `getIterator`                                                                                                    | [View ➤](src/stack/README.md) |
-| `Queue`            | FIFO queue with `enqueue`, `dequeue`, `peek`, `getSize`, `destroy`, `isEmpty`, `getIterator`                                                                                  | [View ➤](src/queue/README.md) |
-| `Heap`             | Binary heap with `add`, `remove`, `peek`, `getSize`, `destroy`, `isEmpty`                                                                                                     | [View ➤](src/heap/README.md) |
-| `BinarySearchTree` | BST with `add`, `remove`, `find`, `isEmpty`, `getSize`, `clear`, `destroy`, in-order/pre/post/level-order                                                                     | [View ➤](src/bst/README.md) |
+| `SinglyList`       | Generic singly linked list with `listAdd`, `listGet`, `listRemoveAt`, `listSize`, `destroyList`, `getIterator`                                                                | [View ➤](datastructures/src/singlyList/README.md) |
+| `DoublyList`       | Doubly linked list with `addFirst`, `addLast`, `removeFirst`, `removeLast`, `removeAt`, `insertAt`, `listGet`, `listSize`, `destroyList`, `getIterator`, `getReverseIterator` | [View ➤](datastructures/src/doublyList/README.md) |
+| `Stack`            | LIFO stack with `push`, `pop`, `peek`, `destroy`, `isEmpty`, `getIterator`                                                                                                    | [View ➤](datastructures/src/stack/README.md) |
+| `Queue`            | FIFO queue with `enqueue`, `dequeue`, `peek`, `getSize`, `destroy`, `isEmpty`, `getIterator`                                                                                  | [View ➤](datastructures/src/queue/README.md) |
+| `Heap`             | Binary heap with `add`, `remove`, `peek`, `getSize`, `destroy`, `isEmpty`                                                                                                     | [View ➤](datastructures/src/heap/README.md) |
+| `BinarySearchTree` | BST with `add`, `remove`, `find`, `isEmpty`, `getSize`, `clear`, `destroy`, in-order/pre/post/level-order                                                                     | [View ➤](datastructures/src/binarySearchTree/README.md) |
 
 ---
 
